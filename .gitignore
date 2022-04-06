@@ -1,0 +1,6 @@
+.idea
+scraper/node_modules
+apartments.sqlite
+table.sql
+res_total.json
+homes.txt

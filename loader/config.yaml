@@ -1,0 +1,57 @@
+migrations: |
+  DROP TABLE IF EXISTS apartment;
+  CREATE TABLE IF NOT EXISTS apartment(
+      found BOOL,
+      listingId INTEGER PRIMARY KEY,
+      listingAgencyReference TEXT,
+      isSoldProperty TEXT,
+      region TEXT,
+      cityName TEXT,
+      lon REAL,
+      lat REAL,
+      price REAL,
+      chargesPrice REAL,
+      caution REAL,
+      agency_fee REAL,
+      propertySubType TEXT,
+      publisher_id TEXT,
+      publisher_remote_visit TEXT,
+      publisher_phone TEXT,
+      publisher_name TEXT,
+      publisher_athome_id TEXT,
+      propertySurface TEXT,
+      buildingYear TEXT,
+      floorNumber TEXT,
+      bathroomsCount TEXT,
+      bedroomsCount TEXT,
+      balconiesCount TEXT,
+      garagesCount TEXT,
+      carparkCount TEXT,
+      hasLivingRoom TEXT,
+      hasKitchen TEXT,
+      availability TEXT,
+      media TEXT,
+      description TEXT,
+      link TEXT,
+      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  
+
+insertQuery: |
+    INSERT INTO apartment(found,listingId,listingAgencyReference,isSoldProperty,region,cityName,
+                          lon,lat,price,chargesPrice,caution,agency_fee,propertySubType,publisher_id,
+                          publisher_remote_visit,publisher_phone,publisher_name,publisher_athome_id,
+                          propertySurface,buildingYear,floorNumber,bathroomsCount,bedroomsCount,balconiesCount,
+                          garagesCount,carparkCount,hasLivingRoom,hasKitchen,availability,media,description,link)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+
+updateQuery: |
+    UPDATE apartment
+    SET found = ?, listingId = ?, listingAgencyReference = ?, isSoldProperty = ?, region = ?, cityName = ?, lon = ?, lat = ?, price = ?,
+        chargesPrice = ?, caution = ?, agency_fee = ?, propertySubType = ?, publisher_id = ?, publisher_remote_visit = ?, publisher_phone = ?, 
+        publisher_name = ?, publisher_athome_id = ?, propertySurface = ?, buildingYear = ?, floorNumber = ?, bathroomsCount = ?, 
+        bedroomsCount = ?, balconiesCount = ?, garagesCount = ?, carparkCount = ?, hasLivingRoom = ?, hasKitchen = ?,
+        availability = ?, media = ?, description = ?, link = ?, updatedAt = CURRENT_TIMESTAMP
+    WHERE listingId = ?

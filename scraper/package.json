@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "fd": "^0.0.3",
+    "fs": "^0.0.1-security",
+    "puppeteer": "^13.5.2",
+    "sqlite3": "^5.0.2"
+  }
+}
