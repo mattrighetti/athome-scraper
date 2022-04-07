@@ -1,5 +1,4 @@
 migrations: |
-  DROP TABLE IF EXISTS apartment;
   CREATE TABLE IF NOT EXISTS apartment(
       found BOOL,
       listingId INTEGER PRIMARY KEY,

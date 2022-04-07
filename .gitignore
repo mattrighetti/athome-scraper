@@ -1,6 +1,8 @@
 .idea
 scraper/node_modules
-apartments.sqlite
-table.sql
-res_total.json
 homes.txt
+analyzer/.ipynb_checkpoints
+analyzer/venv
+loader/main
+.DS_Store
+*.sqlite

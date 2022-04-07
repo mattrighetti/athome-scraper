@@ -1,18 +1,27 @@
+base     := justfile_directory()
 json_out := "/tmp/res.json"
-db_path := "./db.sqlite"
+links    := base + "/homes.txt"
+db_path  := base + "/db.sqlite"
 
 scrape:
-    LINKS_PATH={{justfile_directory()}}/homes.txt \
+    LINKS_PATH={{links}} \
     JSON_OUT={{json_out}} \
     node scraper/main.js
 
 gobuild:
-    cd {{justfile_directory()}}/loader; go build cmd/main.go
+    cd {{base}}/loader; go build cmd/main.go
 
 load: gobuild
-    CONFIG_PATH={{justfile_directory()}}/loader/config.yaml \
+    CONFIG_PATH={{base}}/loader/config.yaml \
     JSON_OUT={{json_out}} \
     DB_PATH={{db_path}} \
-    {{justfile_directory()}}/loader/main
+    {{base}}/loader/main
+
+open:
+    DB_PATH={{db_path}} \
+    {{base}}/analyzer/venv/bin/jupyter notebook \
+    {{base}}/analyzer/apartments.ipynb
 
 all: scrape load
+
+show: all open
