@@ -67,23 +67,24 @@ function clean_obj(o) {
     const data = await fs.readFile(process.env.LINKS_PATH, "utf-8");
     const links = data.split(/\r?\n/);
     
-    var objs = [];
-    for (var i in links) {
+    const linkPromises = links.map(async (link) => {
         let id_pattern = /id-(\d+)/;
-        let id = links[i].match(id_pattern)[1];
+        let id = link.match(id_pattern)[1];
 
         console.log("scraping: " + id);
-        var obj = await scrape_json_data(browser, links[i]);
+        var obj = await scrape_json_data(browser, link);
 
         if (obj.found) {
             obj = clean_obj(obj);
-            obj.link = links[i];
-            objs.push(obj);
-        } else { 
-            objs.push({ found: false, listingId: parseInt(id) });
+            obj.link = link;
+            return obj;
         }
-    }
+        
+        return { found: false, listingId: parseInt(id) };
+    });
     
-    fs.writeFile(process.env.JSON_OUT, JSON.stringify(objs));
+    const objs = await Promise.all(linkPromises);
+    
+    await fs.writeFile(process.env.JSON_OUT, JSON.stringify(objs));
     await browser.close()
 })();
