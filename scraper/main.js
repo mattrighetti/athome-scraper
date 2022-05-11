@@ -45,13 +45,18 @@ function clean_obj(o) {
         carparkCount: (o.carparksCount ? o.carparksCount : null),
         hasLivingroom: (o.hasLivingroom ? o.hasLivingroom : null),
         hasKitchen: (o.has_equipped_kitchen ? o.has_equipped_kitchen : null),
-        availability: (o.transaction.availability.text ? o.transaction.availability.text : null),
-        media: [],
-        description: (o.description.fr ? o.description.fr : null),
+        media: []
     };
 
-    if (o.description.en !== "") {
-        co.description = o.description.en;
+    if (o.transaction.availability != null) {
+        co.availability = (o.transaction.availability.text ? o.transaction.availability.text : null);
+    }
+
+    if (o.description != null) {
+        co.description = (o.description.fr ? o.description.fr : null);
+        if (o.description.en !== "") {
+            co.description = o.description.en;
+        }
     }
 
     for (var i in o.media.items) {

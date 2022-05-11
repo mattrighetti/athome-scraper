@@ -22,6 +22,6 @@ open:
     {{base}}/analyzer/venv/bin/jupyter notebook \
     {{base}}/analyzer/apartments.ipynb
 
-all: scrape load
+fetch: scrape load
 
-show: all open
+show: fetch open
